@@ -1,0 +1,21 @@
+@import '../../index.scss';
+
+.main {
+  position: relative;
+  background-color: #ffffff00;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.main_active {
+  transform: translateX(320px);
+}
+
+@media (max-width: 767px) {
+  .main {
+    width: 100%;
+  }
+}

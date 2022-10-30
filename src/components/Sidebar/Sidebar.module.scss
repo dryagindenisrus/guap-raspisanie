@@ -1,0 +1,47 @@
+@import '../../index.scss';
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  max-width: 320px;
+  min-width: 300px;
+  width: 300px;
+  min-height: 100vh;
+  height: 100vh;
+  
+  color: var(--main-text);
+  box-sizing: border-box;
+  background-color: #333E4832;
+  border-right: #666666 1px solid;
+  padding: 15px;
+  backdrop-filter: blur(4px);
+
+  transition: 0.5s;
+  transform: translateX(-100%);
+}
+
+.sidebar_active {
+  transform: translateX(0%);
+}
+
+.openBtn {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(0, 255, 21);
+  position: absolute;
+  right: -35px;
+  top: 10px;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    min-width: 200px;
+    max-width: 767px;
+    min-height: 100vh;
+    padding: 15px;
+    // position: fixed;
+    // display: none;
+  }
+}

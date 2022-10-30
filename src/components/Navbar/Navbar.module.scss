@@ -1,0 +1,13 @@
+.topnav {
+    position: relative;
+    min-height: 60px;
+    background-color: #aaa;
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+    .topnav {
+        display: block;
+    }
+  }
