@@ -3,13 +3,26 @@ import { useState } from "react";
 
 import styles from './Timetable.module.scss';
 
-export const Timetable = (active: any, setActive: any) => {
+
+interface TimetableProps {
+  active: boolean;
+}
+
+export const Content: React.FC<TimetableProps> = props => {
 
   return (
-    // className={sidebarActive ? styles.sidebar_active + ' ' + styles.sidebar : styles.sidebar}
-    <main className={active ? styles.main_active + ' ' + styles.main : styles.main}>
+    // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
+    
+    <main className={props.active ? styles.main : styles.main_active + ' ' + styles.main}>
+      <div className={styles.weekSelector}></div>
+      <div className={styles.content}>
       Hello, Main
-      <p>1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+        <p>1111111111111111111111111111111111111111111111111111111111111</p>
+        <p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p>
+        <p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p>
+        <p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>10000</p>
+      </div>
+      
     </main>
   )
 }

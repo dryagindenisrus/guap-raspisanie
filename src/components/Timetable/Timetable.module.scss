@@ -1,21 +1,43 @@
 @import '../../index.scss';
 
 .main {
-  position: relative;
+  position: fixed;
+  left: 320px;
   background-color: #ffffff00;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 20px;
-  overflow: hidden;
+  overflow-x: hidden;
   z-index: 0;
 }
 
 .main_active {
-  transform: translateX(320px);
+  transform: translateX(0);
 }
+
+.weekSelector {
+  position: fixed;
+  background-color: #ffffff1f;
+  padding: 10px;
+  position: fixed;
+  width: 100px;
+}
+
 
 @media (max-width: 767px) {
   .main {
     width: 100%;
+    top: 60px;
+    left: 0;
+    transform: translateX(0px);
+    // display: none;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+  }
+  .main_active {
+    transform: translateX(0);
+    display: block;
+    height: auto;
+    // height: auto;
   }
 }

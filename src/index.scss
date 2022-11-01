@@ -1,6 +1,8 @@
 :root {
   --background-color: #080810;
   --main-text: #DEDEDE;
+  --sidebar-border: #666666;
+  --header-color: linear-gradient(180deg, #1D0C83 0%, #140A56 41.67%, #060414 94%, rgba(0, 0, 0, 0) 100%);;
 }
 
 body {
@@ -35,4 +37,13 @@ code {
 
 #root {
   min-height: 100vh;
+}
+
+
+@media (max-width: 767px) {
+  body {
+    &::before {
+      background: none;
+    }
+  }
 }

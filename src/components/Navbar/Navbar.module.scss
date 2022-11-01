@@ -1,13 +1,25 @@
 .topnav {
     position: relative;
-    min-height: 60px;
-    background-color: #aaa;
+    min-height: 72px;
+    background: var(--header-color);
+    width: 100%;
     display: none;
+    z-index: 100;
 }
 
+.openBtn {
+    height: 22px;
+    width: auto;
+    background: none;
+    border: none;
+    margin: 10px;
+}
 
 @media (max-width: 767px) {
     .topnav {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
     }
   }
