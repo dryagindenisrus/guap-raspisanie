@@ -1,0 +1,92 @@
+.day {
+    background-color: #ffffff08;
+    border-radius: 10px;
+    margin: 20px 5px;
+    height: auto;
+
+    .dayName {
+        display: block;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        font-weight: 500;
+        font-size: 15pt;
+        color: #A2B4BE;
+    }
+
+    .lessons {
+        .lesson {
+            padding: 5px;
+            &:nth-child(odd) {
+                background-color: #ffffff08;
+                &:last-child {
+                    border-radius: 0 0 10px 10px;
+                }
+            }
+            &:nth-child(even) {
+                background-color: #ffffff00; 
+            }
+            .time {
+                display: flex;
+                align-items: center;
+                margin: 2px 8px;
+                .lessonCount {
+                    font-size: 14pt;
+                    font-weight: 500;
+                    color: #a0a0a0;
+                }
+                .lessonTime {
+                    font-size: 12pt;
+                }
+                img {
+                    height: 14pt;
+                    width: auto;
+                    margin: 0 5px 0 10px;
+                }
+            }
+            .name {
+                margin-left: 8px;
+                font-size: 15pt;
+                margin-bottom: 4px;
+                img {
+                    height: 13pt;
+                    margin-right: 6px;
+                }
+            }
+            .info {
+                color: #9b9b9b;
+                margin-left: 8px;
+                font-size: 10pt;
+                span {
+                    padding: 1px;
+                    display: block;
+                    &:last-child {
+                        margin-left: 3px;
+                    }
+                }
+                img {
+                    height: 10pt;
+                    width: auto;
+                    margin-right: 6px;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 375px) {
+    .day {
+    
+        .lessons {
+            .lesson {  
+                .name {
+                    font-size: 13pt;
+                    img {
+                        height: 11pt;
+                        margin-right: 6px;
+                    }
+                }
+            }
+        }
+    }
+  }
