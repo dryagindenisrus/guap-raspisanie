@@ -1,74 +1,74 @@
 import React from "react";
 
-import styles from './Day.module.scss';
-import calendar from '../../img/calendar.svg';
-import clock from '../../img/clock.svg';
-import LR from '../../img/LR.svg';
-import L from '../../img/L.svg';
-import Pr from '../../img/PR.svg';
-import person from '../../img/person.svg';
-import build from '../../img/build.svg';
+import { Period } from "../Period";
+import { DayProps } from "../../App";
+import styles from "./Day.module.scss";
+import calendar from "../../img/calendar.svg";
+import clock from "../../img/clock.svg";
+import Lr from "../../img/LR.svg";
+import L from "../../img/L.svg";
+import Pr from "../../img/PR.svg";
+import Kr from "../../img/KR.svg";
+import person from "../../img/person.svg";
+import build from "../../img/build.svg";
 
-
-interface DayProps {
-  active: boolean;
-}
-
-export const Day: React.FC<DayProps> = props => {
+export const Day: React.FC<DayProps> = (props) => {
+  const typeLesson: Array<{ name: string; type: string }> = [
+    { name: "ПР", type: Pr },
+    { name: "Л", type: L },
+    { name: "ЛР", type: Lr },
+    { name: "КР", type: Kr },
+  ];
 
   return (
     // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
-    
-    <div className={styles.day}>
-        <span className={styles.dayName}> <img src={calendar} alt="calendar" /> Понедельник</span>
 
-        <div className={styles.lessons}>
-            <div className={styles.lesson}>
+    <div className={styles.day}>
+      <span className={styles.dayName}>
+        {" "}
+        <img src={calendar} alt="calendar" />
+        {props.day}
+      </span>
+
+      <div className={styles.lessons}>
+        {props.lessons.map((para, index) => (
+          <div key={props.day + index}>
+            {para.map((lesson, id) => (
+              <div key={lesson.count + id} className={styles.lesson}>
                 <div className={styles.time}>
-                    <span className={styles.lessonCount}>1 пара</span>
-                    <img src={clock} alt="clock" />
-                    <span className={styles.lessonTime}>(15:00 - 16:30)</span>
+                  <span className={styles.lessonCount}>
+                    {lesson.count} пара
+                  </span>
+                  {lesson.time ? <img src={clock} alt="clock" /> : <></>}
+                  <span className={styles.lessonTime}>{lesson.time}</span>
+                  <Period period={lesson.period} />
+                  <img src="" alt="" />
                 </div>
                 <div className={styles.name}>
-                    <img src={LR} alt="" />
-                    <span>Компьютерная алгебра</span>
+                  <img
+                    src={
+                      typeLesson.filter((elem) => elem.name === lesson.type)[0]
+                        .type
+                    }
+                    alt=""
+                  />
+                  <span>{lesson.name}</span>
                 </div>
                 <div className={styles.info}>
-                    <span> <img src={build} alt="" />Гастелло 15, ауд. 13-12</span>
-                    <span> <img src={person} alt="" /> Крук A. E.</span>
+                  <span>
+                    <img src={build} alt="" />
+                    {lesson.location}
+                  </span>
+                  <span>
+                    {lesson.prepod ? <img src={person} alt="" /> : <></>}
+                    {lesson.prepod}
+                  </span>
                 </div>
-            </div>
-            <div className={styles.lesson}>
-                <div className={styles.time}>
-                    <span className={styles.lessonCount}>2 пара</span>
-                    <img src={clock} alt="clock" />
-                    <span className={styles.lessonTime}>(17:00 - 18:30)</span>
-                </div>
-                <div className={styles.name}>
-                    <img src={L} alt="" />
-                    <span>Вычислительная техника и информационные технологии</span>
-                </div>
-                <div className={styles.info}>
-                    <span> <img src={build} alt="" /> Б.Морская 67, ауд. 14-28</span>
-                    <span> <img src={person} alt="" /> Крук A. E.</span>
-                </div>
-            </div>
-            <div className={styles.lesson}>
-                <div className={styles.time}>
-                    <span className={styles.lessonCount}>2 пара</span>
-                    <img src={clock} alt="clock" />
-                    <span className={styles.lessonTime}>(17:00 - 18:30)</span>
-                </div>
-                <div className={styles.name}>
-                    <img src={L} alt="" />
-                    <span>Прикладная физическая культура (элективный модуль)</span>
-                </div>
-                <div className={styles.info}>
-                    <span> <img src={build} alt="" /> Б.Морская 67, ауд. спортзал*</span>
-                    {/* <span> <img src={person} alt="" /> Крук A. E.</span> */}
-                </div>
-            </div>
-        </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};

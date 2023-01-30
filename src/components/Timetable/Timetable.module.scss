@@ -11,7 +11,7 @@
   padding: 20px;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding-bottom: 60px;
+  // padding-bottom: 60px;
 }
 
 .content {
@@ -64,18 +64,13 @@
     margin-left: 0;
     padding: 0;
     transform: translateX(0px);
-    // display: none;
-    // overflow: hidden;
     height: 100%;
     max-height: calc(100vh - 60px);
     box-sizing: border-box;
-    padding-bottom: 60px;
   }
   .main_active {
     transform: translateX(0);
     display: block;
-    // height: 100%;
-    // height: auto;
   }
   .content {
     padding: 5px;
