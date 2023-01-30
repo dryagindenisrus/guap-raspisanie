@@ -10,7 +10,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
   useEffect(() => {
-    fetch("/api/v1/params")
+    fetch("https://guap-raspisanie.duckdns.org/api/v1/params")
       .then((res) => res.json())
       .then((json) => {
         setTimeout(() => {

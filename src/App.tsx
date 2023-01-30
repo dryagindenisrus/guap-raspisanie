@@ -70,7 +70,7 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `http://192.168.1.178:8000/api/v1/rasp/${filter.group.value}/${filter.prepod.value}/${filter.corpus.value}/${filter.audit.value}`
+      `https://guap-raspisanie.duckdns.org/api/v1/rasp/${filter.group.value}/${filter.prepod.value}/${filter.corpus.value}/${filter.audit.value}`
     )
       .then((res) => res.json())
       .then((json) => {
