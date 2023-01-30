@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4696b6d6.css",
+    "main.js": "/static/js/main.7b10730d.js",
+    "static/js/787.d3b57c30.chunk.js": "/static/js/787.d3b57c30.chunk.js",
+    "static/media/background.jpg": "/static/media/background.7049f4636fdfd2796de6.jpg",
+    "static/media/guap-logo.svg": "/static/media/guap-logo.73891470ffb70d51376c0d9b198abc2e.svg",
+    "static/media/LR.svg": "/static/media/LR.c2da7fe2b9e19efd9a477b3f372b6cba.svg",
+    "static/media/build.svg": "/static/media/build.49e2b3cc1c252ea25127117de45fc4ea.svg",
+    "static/media/person.svg": "/static/media/person.495774d9370b8de5e15d65e936c51e44.svg",
+    "static/media/KR.svg": "/static/media/KR.526ce75f74de27864032e0a2c60b0911.svg",
+    "static/media/clock.svg": "/static/media/clock.8d4783758156cb7b7424f3b04e167743.svg",
+    "static/media/PR.svg": "/static/media/PR.dda9cf29c9c234e8183696e2aba24b97.svg",
+    "static/media/calendar.svg": "/static/media/calendar.70b0b129ed5d9924efa71946cf2dd7b1.svg",
+    "static/media/L.svg": "/static/media/L.0cb04420a19379de69951c0a54e69b05.svg",
+    "index.html": "/index.html",
+    "static/media/low.svg": "/static/media/low.56fb94d9c600a63fa0b676cc134efd0d.svg",
+    "static/media/up.svg": "/static/media/up.74bec83a6c9147a3d25c8c248045047b.svg",
+    "main.4696b6d6.css.map": "/static/css/main.4696b6d6.css.map",
+    "main.7b10730d.js.map": "/static/js/main.7b10730d.js.map",
+    "787.d3b57c30.chunk.js.map": "/static/js/787.d3b57c30.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4696b6d6.css",
+    "static/js/main.7b10730d.js"
+  ]
+}
