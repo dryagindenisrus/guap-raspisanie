@@ -45,6 +45,29 @@
   display: block;
 }
 
+.togglePeriod {
+  span {
+    font-size: 24px;
+    color: #dfdfdf;
+    font-family: 'Play', sans-serif;
+  }
+  .toggleBtn {
+    position: relative;
+    top: 4px;
+    height: 22px;
+    width: auto;
+    background: none;
+    border: none;
+    margin: 10px;
+    img {
+        height: 22px;
+        margin: 0;
+        padding: 0;
+
+    }
+  }
+}
+
 
 
 @media (max-width: 767px) {

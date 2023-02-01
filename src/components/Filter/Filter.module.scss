@@ -12,27 +12,64 @@
     font-size: 20px;
   }
 
-  input {
-    background-image: linear-gradient(144deg,#7a2db1, #3e2da8 50%,#01858f);
-    opacity: 0.5;
+  .input {
+    max-height: 24px;
+    // background: linear-gradient(144deg,#7a2db1, #3e2da8 50%,#01858f);
     border: none;
     border-radius: 8px;
     font-size: 18px;
     padding: 10px 15px;
     margin: 10px 0;
-    color: #ffffff;
+    color: #c751ad;
     font-family: 'Play', sans-serif;
     border: 1px solid #00000015;
     transition: all .15s ease-in-out;
+    padding: 0;
+    background-color: #5B42F3;
     &:focus {
       border: 1px solid #0000003a;
       opacity: 0.9;
     }
   }
 
+  .basic-single {
+    max-width: 200px;
+  }
+
+  .list {
+    width: 280px;
+    display: block;
+    list-style: none;
+    z-index: 10000;
+    position: absolute;
+    top: 135px;
+    background-color: #00000069;
+    padding: 8px;
+    width: 100%;
+    min-width: 140px;
+    max-width: 240px;
+    max-height: 150px;
+    overflow-y: scroll;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    option {
+      border-bottom: 1px solid #dbdbdb15;
+      margin: 8px 0;
+      font-size: 20px;
+      font-family: 'Play', sans-serif;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      top: 95px;
+      max-width: calc(100wh - 20px);
+      width: 100%;
+      
+    }
+  }
 
   /* CSS */
   .button64 {
+    max-height: 40px;
     margin: 20px 0;
     align-items: center;
     background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
@@ -64,11 +101,12 @@
 
   .button64 span {
     background-color: rgb(5, 6, 45);
-    padding: 16px 24px;
+    padding: 6px;
     border-radius: 8px;
     width: 100%;
     height: 100%;
     transition: 300ms;
+    max-height: 36px;
   }
 
   .button64:hover span {

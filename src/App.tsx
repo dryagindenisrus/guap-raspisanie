@@ -1,16 +1,11 @@
 import React from "react";
-import { useState, useEffect, createContext } from "react";
+import { useState, createContext } from "react";
 
 import "./App.scss";
 import { Sidebar } from "./components/Sidebar";
-import { Content } from "./components/Timetable";
+import { Timetable } from "./components/Timetable";
 import { Navbar } from "./components/Navbar";
 // import { getParams } from './parser';
-
-export interface TimetableProps {
-  active: boolean;
-  raspisanie: Array<DayProps>;
-}
 
 export interface Lesson {
   count: string;
@@ -38,62 +33,80 @@ export interface ParamsFilter {
   prepod: Param;
   corpus: Param;
   audit: Param;
+  today: boolean;
 }
 
 export type TimeTable = Array<DayProps>;
 
-export interface contextObject {
+export interface ContextObject {
   searchValue: ParamsFilter;
   setSearchValue: React.Dispatch<React.SetStateAction<ParamsFilter>>;
 }
 
-export const FilterContext = createContext<contextObject>({
+export interface ContextSidebar {
+  sidebarActive: boolean;
+  setSidebarActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ContextPeriod {
+  period: boolean;
+  setPeriod: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const SidebarContext = createContext<ContextSidebar>({
+  sidebarActive: false,
+  setSidebarActive: React.useState,
+});
+
+export const FilterContext = createContext<ContextObject>({
   searchValue: {
     group: { value: -1, name: "" },
     prepod: { value: -1, name: "" },
     corpus: { value: -1, name: "" },
     audit: { value: -1, name: "" },
+    today: false,
   },
   setSearchValue: React.useState,
 });
 
+export const PeriodContext = createContext<ContextPeriod>({
+  period: false,
+  setPeriod: React.useState,
+});
+
 function App() {
+  const [period, setPeriod] = useState<boolean>(false);
+  const [sidebarActive, setSidebarActive] = useState<boolean>(false);
+
   const [filter, setFilter] = useState<ParamsFilter>({
     group: { value: -1, name: "" },
     prepod: { value: -1, name: "" },
     corpus: { value: -1, name: "" },
     audit: { value: -1, name: "" },
+    today: false,
   });
-
-  const [sidebarActive, setSidebarActive] = useState<boolean>(false);
-  const [items, setItems] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    fetch(
-      `https://guap-raspisanie.duckdns.org/api/v1/rasp/${filter.group.value}/${filter.prepod.value}/${filter.corpus.value}/${filter.audit.value}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setTimeout(() => {
-          setItems(json);
-        });
-      });
-  }, [filter]);
-
-  function toggleSidebar(value: boolean) {
-    setSidebarActive(value);
-  }
 
   return (
     <div className="App">
       <FilterContext.Provider
         value={{ searchValue: filter, setSearchValue: setFilter }}
       >
-        <Navbar active={sidebarActive} setActive={toggleSidebar} />
-        <div className="content">
-          <Sidebar active={sidebarActive} />
-          <Content active={sidebarActive} raspisanie={items} />
-        </div>
+        <PeriodContext.Provider
+          value={{ period: period, setPeriod: setPeriod }}
+        >
+          <SidebarContext.Provider
+            value={{
+              sidebarActive: sidebarActive,
+              setSidebarActive: setSidebarActive,
+            }}
+          >
+            <Navbar />
+            <div className="content">
+              <Sidebar />
+              <Timetable />
+            </div>
+          </SidebarContext.Provider>
+        </PeriodContext.Provider>
       </FilterContext.Provider>
     </div>
   );

@@ -6,13 +6,31 @@
     display: none;
     z-index: 100;
 }
-
+.btnGroup {
+    display: flex;
+    align-items: center;
+}
 .openBtn {
     height: 22px;
     width: auto;
     background: none;
     border: none;
     margin: 10px;
+}
+
+.toggleBtn {
+    height: 22px;
+    width: auto;
+    background: none;
+    border: none;
+    margin: 10px;
+    img {
+        position: relative;
+        bottom: 7px;
+        height: 22px;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 @media (max-width: 767px) {
