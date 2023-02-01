@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { SearchBar } from "./SearchBar";
+import React, { useContext, useState, useEffect } from 'react';
+import { SearchBar } from './SearchBar';
 
-import { host } from "../..";
+import { host } from '../..';
 import {
   SidebarContext,
   ContextSidebar,
@@ -10,8 +10,8 @@ import {
   FilterContext,
   PeriodContext,
   ContextPeriod,
-} from "../../App";
-import styles from "./Filter.module.scss";
+} from '../../App';
+import styles from './Filter.module.scss';
 
 interface ParamsFilterInput {
   group: Param;
@@ -34,7 +34,7 @@ export const Filter = () => {
   }>({ groups: [], prepods: [], corpuses: [], audits: [], today: false });
 
   useEffect(() => {
-    fetch(host + "/api/v1/params")
+    fetch(host + '/api/v1/params')
       .then((res) => res.json())
       .then((json) => {
         setTimeout(() => {
@@ -44,78 +44,79 @@ export const Filter = () => {
   }, []);
 
   const [groupSt, setGroupSt] = useState<string>(
-    window.localStorage.getItem("selectedGroup") || ""
+    window.localStorage.getItem('selectedGroup') || ''
   );
   const [prepodSt, setPrepodSt] = useState<string>(
-    window.localStorage.getItem("selectedPrepod") || ""
+    window.localStorage.getItem('selectedPrepod') || ''
   );
   const [corpusSt, setCorpusSt] = useState<string>(
-    window.localStorage.getItem("selectedCorpus") || ""
+    window.localStorage.getItem('selectedCorpus') || ''
   );
   const [auditSt, setAuditSt] = useState<string>(
-    window.localStorage.getItem("selectedAudit") || ""
+    window.localStorage.getItem('selectedAudit') || ''
   );
 
   const onClickEvent = () => {
     setSidebarActive(false);
     setPeriod(items.today);
     const genereObject: ParamsFilterInput = {
-      group: items.groups.filter(
-        (elem) => elem.name === groupSt.toUpperCase()
-      )[0] || {
+      group: items.groups.filter((elem) => elem.name === groupSt.toUpperCase())[0] || {
         value: -1,
-        name: "",
+        name: '',
       },
-      prepod: items.prepods.filter((elem1) =>
-        elem1.name.includes(prepodSt)
-      )[0] || { value: -1, name: "" },
-      corpus: items.corpuses.filter((elem2) =>
-        elem2.name.includes(corpusSt)
-      )[0] || { value: -1, name: "" },
-      audit: items.audits.filter((elem3) =>
-        elem3.name.includes(auditSt)
-      )[0] || { value: -1, name: "" },
+      prepod: items.prepods.filter((elem1) => elem1.name.includes(prepodSt))[0] || {
+        value: -1,
+        name: '',
+      },
+      corpus: items.corpuses.filter((elem2) => elem2.name.includes(corpusSt))[0] || {
+        value: -1,
+        name: '',
+      },
+      audit: items.audits.filter((elem3) => elem3.name.includes(auditSt))[0] || {
+        value: -1,
+        name: '',
+      },
     };
 
     setSearchValue({
       group: {
         value: genereObject.group?.value || -1,
-        name: genereObject.group?.name || "",
+        name: genereObject.group?.name || '',
       },
       prepod: {
         value: genereObject.prepod?.value || -1,
-        name: genereObject.prepod?.name || "",
+        name: genereObject.prepod?.name || '',
       },
       corpus: {
         value: genereObject.corpus?.value || -1,
-        name: genereObject.corpus?.name || "",
+        name: genereObject.corpus?.name || '',
       },
       audit: {
         value: genereObject.audit?.value || -1,
-        name: genereObject.audit?.name || "",
+        name: genereObject.audit?.name || '',
       },
       today: items.today,
     });
 
-    if (genereObject.group.name !== "- нет -") {
-      window.localStorage.setItem("selectedGroup", genereObject.group.name);
+    if (genereObject.group.name !== '- нет -') {
+      window.localStorage.setItem('selectedGroup', genereObject.group.name);
     } else {
-      window.localStorage.removeItem("selectedGroup");
+      window.localStorage.removeItem('selectedGroup');
     }
-    if (genereObject.prepod.name !== "- нет -") {
-      window.localStorage.setItem("selectedPrepod", genereObject.prepod.name);
+    if (genereObject.prepod.name !== '- нет -') {
+      window.localStorage.setItem('selectedPrepod', genereObject.prepod.name);
     } else {
-      window.localStorage.removeItem("selectedPrepod");
+      window.localStorage.removeItem('selectedPrepod');
     }
-    if (genereObject.corpus.name !== "- нет -") {
-      window.localStorage.setItem("selectedCorpus", genereObject.corpus.name);
+    if (genereObject.corpus.name !== '- нет -') {
+      window.localStorage.setItem('selectedCorpus', genereObject.corpus.name);
     } else {
-      window.localStorage.removeItem("selectedCorpus");
+      window.localStorage.removeItem('selectedCorpus');
     }
-    if (genereObject.audit.name !== "- нет -") {
-      window.localStorage.setItem("selectedAudit", genereObject.audit.name);
+    if (genereObject.audit.name !== '- нет -') {
+      window.localStorage.setItem('selectedAudit', genereObject.audit.name);
     } else {
-      window.localStorage.removeItem("selectedAudit");
+      window.localStorage.removeItem('selectedAudit');
     }
   };
 
@@ -154,11 +155,7 @@ export const Filter = () => {
         data={items.audits}
         placeholder="Аудитория..."
       />
-      <button
-        key="btn"
-        onClick={() => onClickEvent()}
-        className={styles.button64}
-      >
+      <button key="btn" onClick={() => onClickEvent()} className={styles.button64}>
         <span className={styles.text}>Найти</span>
       </button>
     </div>

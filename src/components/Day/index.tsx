@@ -1,33 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import { ContextPeriod, PeriodContext, DayProps } from "../../App";
-import { Period } from "../Period";
-import styles from "./Day.module.scss";
-import calendar from "../../img/calendar.svg";
-import clock from "../../img/clock.svg";
-import Lr from "../../img/LR.svg";
-import L from "../../img/L.svg";
-import Pr from "../../img/PR.svg";
-import Kr from "../../img/KR.svg";
-import person from "../../img/person.svg";
-import build from "../../img/build.svg";
+import { ContextPeriod, PeriodContext, DayProps } from '../../App';
+import { Period } from '../Period';
+import styles from './Day.module.scss';
+import calendar from '../../img/calendar.svg';
+import clock from '../../img/clock.svg';
+import Lr from '../../img/LR.svg';
+import L from '../../img/L.svg';
+import Pr from '../../img/PR.svg';
+import Kr from '../../img/KR.svg';
+import person from '../../img/person.svg';
+import build from '../../img/build.svg';
 
 export const Day: React.FC<DayProps> = (props) => {
   const typeLesson: Array<{ name: string; type: string }> = [
-    { name: "ПР", type: Pr },
-    { name: "Л", type: L },
-    { name: "ЛР", type: Lr },
-    { name: "КР", type: Kr },
+    { name: 'ПР', type: Pr },
+    { name: 'Л', type: L },
+    { name: 'ЛР', type: Lr },
+    { name: 'КР', type: Kr },
   ];
   const { period } = useContext<ContextPeriod>(PeriodContext);
 
   const isTruePeriod = (period: boolean, lessonPeriod: string) => {
-    const arrayPeriods: Array<string> = ["low", "up", "all"];
+    const arrayPeriods: Array<string> = ['low', 'up', 'all'];
     return Boolean(arrayPeriods[Number(period)] !== lessonPeriod);
   };
 
   return (
-    // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
+  // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
 
     <div className={styles.day}>
       <span className={styles.dayName}>
@@ -39,14 +39,9 @@ export const Day: React.FC<DayProps> = (props) => {
         {props.lessons.map((para) =>
           para.map((lesson, id) =>
             isTruePeriod(period, lesson.period) ? (
-              <div
-                key={lesson.name + "_" + lesson.period}
-                className={styles.lesson}
-              >
+              <div key={lesson.name + '_' + lesson.period} className={styles.lesson}>
                 <div className={styles.time}>
-                  <span className={styles.lessonCount}>
-                    {lesson.count} пара
-                  </span>
+                  <span className={styles.lessonCount}>{lesson.count} пара</span>
                   {lesson.time ? <img src={clock} alt="clock" /> : <></>}
                   <span className={styles.lessonTime}>{lesson.time}</span>
                   <Period period={lesson.period} />

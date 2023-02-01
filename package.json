@@ -13,7 +13,10 @@
     "@types/react-dom": "^18.0.7",
     "axios": "^1.2.6",
     "cheerio": "^1.0.0-rc.12",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "gh-pages": "^5.0.0",
+    "prettier": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
@@ -28,6 +31,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint -c .eslintrc --ext .js,.ts,.jsx,.tsx, .",
+    "lint:fix": "npm run lint -- --fix",
+    "precommit": "lint-staged",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
@@ -48,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0"
   }
 }

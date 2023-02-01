@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+# SUAI Timetable \[remaster\]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## For Developers  
 
-## Available Scripts
+### `npm install`
+Installing dependencies
 
-In the project directory, you can run:
-
-### `npm start`
-
+### `npm run start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
-
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm lint`  `npm lint:fix`
+Runs eslint, eslint config in `.eslintrc` and `.eslintignore` for ignore files.
 
-### `npm run eject`
+### `npm run format`
+Runs prettier for all project, prettier config in `.prettierrc` and `.prettierignore` for ignore files.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+***
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## For Users
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### You can use last version [Here](https://danzo0l.github.io/guap-raspisanie/)
 
-## Learn More
+### Buttons and other usable components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Week filter  
+> Click on the triangle to change the week filter option  
+> **The default is the current week.**  
+> ![Week filter](img/week-filter1.png "Sidebar week selector")
+> ![Week filter](img/week-filter2.png "Header week selector")
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Open sidebar  
+> Click bottun Click on the button to show/hide the menu  
+> **(only mobile)**  
+> ![Toggle sidebar ](img/button-sidebar.png "Sidebar button")
+
+#### Search filters  
+> Use this fields for setting search filters options  
+> **(Filters use LocalStorage - after updating page params will be saved)**  
+> ![Search filters](img/search-filters.png "Search filters")
+>
+> #### Filter field  
+>> You can use this field for inputing value from keyboard and list help you select option  
+>> Use `DOUBLE CLICK` for clear field   
+>> ![Filter field](img/field-filters.png "Filter field")  
+>> Click the arrow to expand the list of values  
+>> ![Expand button](img/button-filter.png "Expand button")  
+>> ![Expand list](img/expand-field.png "Expand list")  
+>> **You must select value from list**
+>
+#### Button submit  
+> when you set the necessary filter parameters, click on the button - the application will send a request (It may take quite a while)  
+> ![Submit button](img/submit.png "Submit button")  
+
+### Timetable visualisation  
+
+#### Day element  
+> ![Day timetable](img/timetable.png "Day timetable")  
+> Element `Content` includes some elements `Day`  
+> This elements don't have usable elements, you can only scroll
+
+## Have a good day ; )
+

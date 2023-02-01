@@ -20,8 +20,5 @@
     "main.f34d2be0.js.map": "/guap-raspisanie/static/js/main.f34d2be0.js.map",
     "787.d3b57c30.chunk.js.map": "/guap-raspisanie/static/js/787.d3b57c30.chunk.js.map"
   },
-  "entrypoints": [
-    "static/css/main.fe5d547a.css",
-    "static/js/main.f34d2be0.js"
-  ]
+  "entrypoints": ["static/css/main.fe5d547a.css", "static/js/main.f34d2be0.js"]
 }

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 import { FilterContext, ContextObject, DayProps } from '../../App';
@@ -14,20 +14,20 @@ export const Timetable = () => {
 
   // setIsLoading(true);
 
-  const generateRequest = () => {
+  useEffect(() => {
     setIsLoading(true);
     const req: string =
       host +
       `/api/v1/rasp/${searchValue.group.value}/${searchValue.prepod.value}/${searchValue.corpus.value}/${searchValue.audit.value}`;
-    axios.get(req).then((json) => {
-      setItems(json.data);
-    });
-    setIsLoading(false);
-  };
+    axios
+      .get(req)
+      .then((json) => {
+        setItems(json.data);
+      })
+      .then(() => setIsLoading(false));
+  }, [searchValue]);
 
   return (
-    // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
-
     <main className={styles.main_active + ' ' + styles.main}>
       {isLoading ? (
         <Loader />

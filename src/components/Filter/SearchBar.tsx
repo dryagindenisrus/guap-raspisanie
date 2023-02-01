@@ -1,7 +1,7 @@
-import React from "react";
-import Select from "react-select";
+import React from 'react';
+import Select from 'react-select';
 
-import styles from "./Filter.module.scss";
+import styles from './Filter.module.scss';
 
 interface SearchBarProps {
   setParametr: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +12,7 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = (props) => {
   const changeValue = (event: { name: string; value: number } | null) => {
-    props.setParametr(event?.name.replace("- нет -", "") || "");
+    props.setParametr(event?.name.replace('- нет -', '') || '');
   };
 
   // window.localStorage.setItem("selectedGroup", genereObject.group.name);
@@ -23,7 +23,7 @@ export const SearchBar: React.FC<SearchBarProps> = (props) => {
   return (
     <Select
       defaultInputValue={
-        window.localStorage.getItem("selected" + props.selected) || undefined
+        window.localStorage.getItem('selected' + props.selected) || undefined
       }
       className={styles.input}
       placeholder={props.placeholder}

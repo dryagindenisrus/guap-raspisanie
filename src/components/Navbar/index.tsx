@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
 import {
   SidebarContext,
   ContextSidebar,
   PeriodContext,
   ContextPeriod,
-} from "../../App";
+} from '../../App';
 
-import styles from "./Navbar.module.scss";
-import logo from "../../img/guap-logo.svg";
-import low from "../../img/low.svg";
-import up from "../../img/up.svg";
+import styles from './Navbar.module.scss';
+import logo from '../../img/guap-logo.svg';
+import low from '../../img/low.svg';
+import up from '../../img/up.svg';
 
 export const Navbar = () => {
   const { sidebarActive, setSidebarActive } =
