@@ -54,7 +54,7 @@ export interface ContextPeriod {
 }
 
 export const SidebarContext = createContext<ContextSidebar>({
-  sidebarActive: false,
+  sidebarActive: true,
   setSidebarActive: React.useState,
 });
 

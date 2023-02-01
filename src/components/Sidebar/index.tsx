@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
   SidebarContext,
@@ -15,8 +15,14 @@ import low from '../../img/low.svg';
 import up from '../../img/up.svg';
 
 export const Sidebar = () => {
-  const { sidebarActive } = useContext<ContextSidebar>(SidebarContext);
+  const { sidebarActive, setSidebarActive } =
+    useContext<ContextSidebar>(SidebarContext);
   const { period, setPeriod } = useContext<ContextPeriod>(PeriodContext);
+
+  useEffect(() => {
+    setSidebarActive(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <aside

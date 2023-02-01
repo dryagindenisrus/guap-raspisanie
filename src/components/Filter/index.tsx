@@ -57,7 +57,6 @@ export const Filter = () => {
   );
 
   const onClickEvent = () => {
-    setSidebarActive(false);
     setPeriod(items.today);
     const genereObject: ParamsFilterInput = {
       group: items.groups.filter((elem) => elem.name === groupSt.toUpperCase())[0] || {
@@ -77,7 +76,7 @@ export const Filter = () => {
         name: '',
       },
     };
-
+    setSidebarActive(false);
     setSearchValue({
       group: {
         value: genereObject.group?.value || -1,

@@ -30,8 +30,8 @@ export const Timetable = () => {
   return (
     <main className={styles.main_active + ' ' + styles.main}>
       {isLoading ? (
-        <Loader />
-      ) : (
+        <Loader message="Загрузка..." />
+      ) : items.length ? (
         <div className={styles.content}>
           {items.map((dayLessons, index) => (
             <Day
@@ -41,6 +41,8 @@ export const Timetable = () => {
             />
           ))}
         </div>
+      ) : (
+        <Loader message="Ничего не найдено" />
       )}
     </main>
   );
