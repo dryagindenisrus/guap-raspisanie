@@ -11,6 +11,30 @@
     color: #7A7A7A;
     font-size: 20px;
   }
+  
+  .label {
+    position: relative;
+    top: 8px;
+    font-family: 'Play', sans-serif;
+  }
+
+  input {
+    background-image: linear-gradient(144deg,#7a2db1, #3e2da8 50%,#01858f);
+    opacity: 0.5;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    color: #ffffff;
+    font-family: 'Play', sans-serif;
+    border: 1px solid #00000015;
+    transition: all .15s ease-in-out;
+    &:focus {
+      border: 1px solid #0000003a;
+      opacity: 0.9;
+    }
+  }
 
   .input {
     max-height: 24px;
@@ -20,7 +44,7 @@
     font-size: 18px;
     padding: 10px 15px;
     margin: 10px 0;
-    color: #c751ad;
+    color: #2b2b2b;
     font-family: 'Play', sans-serif;
     border: 1px solid #00000015;
     transition: all .15s ease-in-out;

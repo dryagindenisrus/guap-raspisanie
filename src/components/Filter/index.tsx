@@ -43,10 +43,18 @@ export const Filter = () => {
       });
   }, []);
 
-  const [groupSt, setGroupSt] = useState<string>("");
-  const [prepodSt, setPrepodSt] = useState<string>("");
-  const [corpusSt, setCorpusSt] = useState<string>("");
-  const [auditSt, setAuditSt] = useState<string>("");
+  const [groupSt, setGroupSt] = useState<string>(
+    window.localStorage.getItem("selectedGroup") || ""
+  );
+  const [prepodSt, setPrepodSt] = useState<string>(
+    window.localStorage.getItem("selectedPrepod") || ""
+  );
+  const [corpusSt, setCorpusSt] = useState<string>(
+    window.localStorage.getItem("selectedCorpus") || ""
+  );
+  const [auditSt, setAuditSt] = useState<string>(
+    window.localStorage.getItem("selectedAudit") || ""
+  );
 
   const onClickEvent = () => {
     setSidebarActive(false);
@@ -69,11 +77,6 @@ export const Filter = () => {
       )[0] || { value: -1, name: "" },
     };
 
-    setCorpusSt(genereObject.group.name.replace("- нет -", ""));
-    setPrepodSt(genereObject.prepod.name.replace("- нет -", ""));
-    setCorpusSt(genereObject.corpus.name?.replace("- нет -", ""));
-    setAuditSt(genereObject.audit.name.replace("- нет -", ""));
-
     setSearchValue({
       group: {
         value: genereObject.group?.value || -1,
@@ -93,65 +96,69 @@ export const Filter = () => {
       },
       today: items.today,
     });
+
+    if (genereObject.group.name !== "- нет -") {
+      window.localStorage.setItem("selectedGroup", genereObject.group.name);
+    } else {
+      window.localStorage.removeItem("selectedGroup");
+    }
+    if (genereObject.prepod.name !== "- нет -") {
+      window.localStorage.setItem("selectedPrepod", genereObject.prepod.name);
+    } else {
+      window.localStorage.removeItem("selectedPrepod");
+    }
+    if (genereObject.corpus.name !== "- нет -") {
+      window.localStorage.setItem("selectedCorpus", genereObject.corpus.name);
+    } else {
+      window.localStorage.removeItem("selectedCorpus");
+    }
+    if (genereObject.audit.name !== "- нет -") {
+      window.localStorage.setItem("selectedAudit", genereObject.audit.name);
+    } else {
+      window.localStorage.removeItem("selectedAudit");
+    }
   };
 
   return (
     <div className={styles.filters}>
       <span className={styles.title}>Фильтры</span>
-      {/* <input
-        value={groupSt}
-        onChange={(event) => {
-          setGroupSt(event.target.value);
-        }}
-        key="g"
-        placeholder="группа"
-      /> */}
+      <span className={styles.label}>Группа</span>
       <SearchBar
+        selected="Group"
+        key="g"
         setParametr={setGroupSt}
         data={items.groups}
         placeholder="Группа..."
       />
+      <span className={styles.label}>Преподаватель</span>
       <SearchBar
+        selected="Prepod"
+        key="p"
         setParametr={setPrepodSt}
         data={items.prepods}
         placeholder="Преподаватель..."
       />
+      <span className={styles.label}>Корпус</span>
       <SearchBar
+        selected="Corpus"
+        key="b"
         setParametr={setCorpusSt}
         data={items.corpuses}
         placeholder="Корпус..."
       />
+      <span className={styles.label}>Аудитория</span>
       <SearchBar
+        selected="Audit"
+        key="r"
         setParametr={setAuditSt}
         data={items.audits}
         placeholder="Аудитория..."
       />
-
-      {/* <input
-        value={prepodSt}
-        onChange={(event) => {
-          setPrepodSt(event.target.value);
-        }}
-        key="p"
-        placeholder="преподаватель"
-      />
-      <input
-        value={corpusSt}
-        onChange={(event) => {
-          setCorpusSt(event.target.value);
-        }}
-        key="b"
-        placeholder="курпус"
-      />
-      <input
-        value={auditSt}
-        onChange={(event) => {
-          setAuditSt(event.target.value);
-        }}
-        key="r"
-        placeholder="аудитория"
-      /> */}
-      <button onClick={() => onClickEvent()} className={styles.button64}>
+      <button
+        key="btn"
+        onClick={() => onClickEvent()}
+        className={styles.button64}
+      >
         <span className={styles.text}>Найти</span>
       </button>
     </div>

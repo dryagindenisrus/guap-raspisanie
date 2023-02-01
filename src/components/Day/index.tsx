@@ -31,7 +31,6 @@ export const Day: React.FC<DayProps> = (props) => {
 
     <div className={styles.day}>
       <span className={styles.dayName}>
-        {" "}
         <img src={calendar} alt="calendar" />
         {props.day}
       </span>
@@ -40,7 +39,10 @@ export const Day: React.FC<DayProps> = (props) => {
         {props.lessons.map((para) =>
           para.map((lesson, id) =>
             isTruePeriod(period, lesson.period) ? (
-              <div key={lesson.count + id} className={styles.lesson}>
+              <div
+                key={lesson.name + "_" + lesson.period}
+                className={styles.lesson}
+              >
                 <div className={styles.time}>
                   <span className={styles.lessonCount}>
                     {lesson.count} пара

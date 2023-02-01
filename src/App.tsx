@@ -1,10 +1,10 @@
-import React from "react";
-import { useState, createContext } from "react";
+import React from 'react';
+import { useState, createContext } from 'react';
 
-import "./App.scss";
-import { Sidebar } from "./components/Sidebar";
-import { Timetable } from "./components/Timetable";
-import { Navbar } from "./components/Navbar";
+import './App.scss';
+import { Sidebar } from './components/Sidebar';
+import { Timetable } from './components/Timetable';
+import { Navbar } from './components/Navbar';
 // import { getParams } from './parser';
 
 export interface Lesson {
@@ -60,10 +60,10 @@ export const SidebarContext = createContext<ContextSidebar>({
 
 export const FilterContext = createContext<ContextObject>({
   searchValue: {
-    group: { value: -1, name: "" },
-    prepod: { value: -1, name: "" },
-    corpus: { value: -1, name: "" },
-    audit: { value: -1, name: "" },
+    group: { value: -1, name: '' },
+    prepod: { value: -1, name: '' },
+    corpus: { value: -1, name: '' },
+    audit: { value: -1, name: '' },
     today: false,
   },
   setSearchValue: React.useState,
@@ -79,10 +79,10 @@ function App() {
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
 
   const [filter, setFilter] = useState<ParamsFilter>({
-    group: { value: -1, name: "" },
-    prepod: { value: -1, name: "" },
-    corpus: { value: -1, name: "" },
-    audit: { value: -1, name: "" },
+    group: { value: -1, name: '' },
+    prepod: { value: -1, name: '' },
+    corpus: { value: -1, name: '' },
+    audit: { value: -1, name: '' },
     today: false,
   });
 
@@ -91,9 +91,7 @@ function App() {
       <FilterContext.Provider
         value={{ searchValue: filter, setSearchValue: setFilter }}
       >
-        <PeriodContext.Provider
-          value={{ period: period, setPeriod: setPeriod }}
-        >
+        <PeriodContext.Provider value={{ period: period, setPeriod: setPeriod }}>
           <SidebarContext.Provider
             value={{
               sidebarActive: sidebarActive,

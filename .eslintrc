@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "react-app/jest",
+    "prettier"
+  ],
+  "rules": {
+    "no-mixed-spaces-and-tabs": "error",
+    "no-console": "error",
+    "quotes": ["error", "single"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "prefer-const": "error",
+    "indent": ["warn", 2],
+    // "max-len": ["error", {"code": 108}],
+    "comma-dangle": "off",
+    "semi": ["error", "always"]
+  }
+}

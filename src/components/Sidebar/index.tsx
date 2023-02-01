@@ -1,18 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
 import {
   SidebarContext,
   ContextSidebar,
   PeriodContext,
   ContextPeriod,
-} from "../../App";
-import { Filter } from "../Filter";
+} from '../../App';
+import { Filter } from '../Filter';
 
-import styles from "./Sidebar.module.scss";
+import styles from './Sidebar.module.scss';
 
-import logo from "../../img/guap-logo.svg";
-import low from "../../img/low.svg";
-import up from "../../img/up.svg";
+import logoLong from '../../img/logo-long.svg';
+import low from '../../img/low.svg';
+import up from '../../img/up.svg';
 
 export const Sidebar = () => {
   const { sidebarActive } = useContext<ContextSidebar>(SidebarContext);
@@ -21,17 +21,13 @@ export const Sidebar = () => {
   return (
     <aside
       className={
-        sidebarActive
-          ? styles.sidebar
-          : styles.sidebar_active + " " + styles.sidebar
+        sidebarActive ? styles.sidebar : styles.sidebar_active + ' ' + styles.sidebar
       }
     >
       <div className={styles.about}>
-        <img src={logo} alt="" />
-        <h1>SUAI</h1>
+        <img src={logoLong} alt="" height={32} />
         <span>расписание</span>
       </div>
-
       <Filter />
       <div className={styles.togglePeriod}>
         <span>Выбрать неделю</span>
