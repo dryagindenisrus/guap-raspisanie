@@ -97,26 +97,22 @@ export const Filter = () => {
       today: items.today,
     });
 
-    if (genereObject.group.name !== '- нет -') {
-      window.localStorage.setItem('selectedGroup', genereObject.group.name);
-    } else {
-      window.localStorage.removeItem('selectedGroup');
-    }
-    if (genereObject.prepod.name !== '- нет -') {
-      window.localStorage.setItem('selectedPrepod', genereObject.prepod.name);
-    } else {
-      window.localStorage.removeItem('selectedPrepod');
-    }
-    if (genereObject.corpus.name !== '- нет -') {
-      window.localStorage.setItem('selectedCorpus', genereObject.corpus.name);
-    } else {
-      window.localStorage.removeItem('selectedCorpus');
-    }
-    if (genereObject.audit.name !== '- нет -') {
-      window.localStorage.setItem('selectedAudit', genereObject.audit.name);
-    } else {
-      window.localStorage.removeItem('selectedAudit');
-    }
+    window.localStorage.setItem(
+      'selectedGroup',
+      genereObject.group.name + '&' + genereObject.group.value
+    );
+    window.localStorage.setItem(
+      'selectedPrepod',
+      genereObject.prepod.name + '&' + genereObject.prepod.value
+    );
+    window.localStorage.setItem(
+      'selectedCorpus',
+      genereObject.corpus.name + '&' + genereObject.corpus.value
+    );
+    window.localStorage.setItem(
+      'selectedAudit',
+      genereObject.audit.name + '&' + genereObject.audit.value
+    );
   };
 
   return (

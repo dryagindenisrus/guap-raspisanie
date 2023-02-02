@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/guap-raspisanie/static/css/main.f53a8289.css",
-    "main.js": "/guap-raspisanie/static/js/main.6f8e5101.js",
+    "main.js": "/guap-raspisanie/static/js/main.a15b1b7f.js",
     "static/js/787.d3b57c30.chunk.js": "/guap-raspisanie/static/js/787.d3b57c30.chunk.js",
     "static/media/background.jpg": "/guap-raspisanie/static/media/background.7049f4636fdfd2796de6.jpg",
     "static/media/logo-long.svg": "/guap-raspisanie/static/media/logo-long.353584a367d4de4b63ff0f93a238a4d4.svg",
@@ -18,11 +18,11 @@
     "static/media/low.svg": "/guap-raspisanie/static/media/low.56fb94d9c600a63fa0b676cc134efd0d.svg",
     "static/media/up.svg": "/guap-raspisanie/static/media/up.74bec83a6c9147a3d25c8c248045047b.svg",
     "main.f53a8289.css.map": "/guap-raspisanie/static/css/main.f53a8289.css.map",
-    "main.6f8e5101.js.map": "/guap-raspisanie/static/js/main.6f8e5101.js.map",
+    "main.a15b1b7f.js.map": "/guap-raspisanie/static/js/main.a15b1b7f.js.map",
     "787.d3b57c30.chunk.js.map": "/guap-raspisanie/static/js/787.d3b57c30.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f53a8289.css",
-    "static/js/main.6f8e5101.js"
+    "static/js/main.a15b1b7f.js"
   ]
 }

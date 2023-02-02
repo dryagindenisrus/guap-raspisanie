@@ -27,8 +27,6 @@ export const Day: React.FC<DayProps> = (props) => {
   };
 
   return (
-  // className={TimetableActive ? styles.Timetable_active + ' ' + styles.Timetable : styles.Timetable}
-
     <div className={styles.day}>
       <span className={styles.dayName}>
         <img src={calendar} alt="calendar" />

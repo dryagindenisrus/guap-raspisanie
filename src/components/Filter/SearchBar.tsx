@@ -12,7 +12,7 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = (props) => {
   const changeValue = (event: { name: string; value: number } | null) => {
-    props.setParametr(event?.name.replace('- нет -', '') || '');
+    props.setParametr(event?.name || '');
   };
 
   // window.localStorage.setItem("selectedGroup", genereObject.group.name);
@@ -23,7 +23,8 @@ export const SearchBar: React.FC<SearchBarProps> = (props) => {
   return (
     <Select
       defaultInputValue={
-        window.localStorage.getItem('selected' + props.selected) || undefined
+        window.localStorage.getItem('selected' + props.selected)?.split('&')[0] ||
+        undefined
       }
       className={styles.input}
       placeholder={props.placeholder}
