@@ -23,8 +23,10 @@ export const SearchBar: React.FC<SearchBarProps> = (props) => {
   return (
     <Select
       defaultInputValue={
-        window.localStorage.getItem('selected' + props.selected)?.split('&')[0] ||
-        undefined
+        window.localStorage
+          .getItem('selected' + props.selected)
+          ?.split('&')[0]
+          .replace('- нет -', '') || undefined
       }
       className={styles.input}
       placeholder={props.placeholder}

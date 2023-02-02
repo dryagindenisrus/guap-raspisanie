@@ -58,41 +58,54 @@ export const Filter = () => {
 
   const onClickEvent = () => {
     setPeriod(items.today);
+    /* eslint-disable indent */
     const genereObject: ParamsFilterInput = {
-      group: items.groups.filter((elem) => elem.name === groupSt.toUpperCase())[0] || {
-        value: -1,
-        name: '',
-      },
+      group: items.groups.filter((elem) => elem.name.includes(groupSt))[0] || {
+          value: window.localStorage.getItem('selectedGroup')?.split('&')[1],
+          name: window.localStorage.getItem('selectedGroup')?.split('&')[0],
+        } || {
+          value: -1,
+          name: '- нет -',
+        },
       prepod: items.prepods.filter((elem1) => elem1.name.includes(prepodSt))[0] || {
-        value: -1,
-        name: '',
-      },
+          value: window.localStorage.getItem('selectedPrepod')?.split('&')[1],
+          name: window.localStorage.getItem('selectedPrepod')?.split('&')[0],
+        } || {
+          value: -1,
+          name: '- нет -',
+        },
       corpus: items.corpuses.filter((elem2) => elem2.name.includes(corpusSt))[0] || {
-        value: -1,
-        name: '',
-      },
+          value: window.localStorage.getItem('selectedCorpus')?.split('&')[1],
+          name: window.localStorage.getItem('selectedCorpus')?.split('&')[0],
+        } || {
+          value: -1,
+          name: '- нет -',
+        },
       audit: items.audits.filter((elem3) => elem3.name.includes(auditSt))[0] || {
-        value: -1,
-        name: '',
-      },
+          value: window.localStorage.getItem('selectedAudit')?.split('&')[1],
+          name: window.localStorage.getItem('selectedAudit')?.split('&')[0],
+        } || {
+          value: -1,
+          name: '- нет -',
+        },
     };
     setSidebarActive(false);
     setSearchValue({
       group: {
         value: genereObject.group?.value || -1,
-        name: genereObject.group?.name || '',
+        name: genereObject.group?.name || '- нет -',
       },
       prepod: {
         value: genereObject.prepod?.value || -1,
-        name: genereObject.prepod?.name || '',
+        name: genereObject.prepod?.name || '- нет -',
       },
       corpus: {
         value: genereObject.corpus?.value || -1,
-        name: genereObject.corpus?.name || '',
+        name: genereObject.corpus?.name || '- нет -',
       },
       audit: {
         value: genereObject.audit?.value || -1,
-        name: genereObject.audit?.name || '',
+        name: genereObject.audit?.name || '- нет -',
       },
       today: items.today,
     });

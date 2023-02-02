@@ -1,7 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-import { FilterContext, ContextObject, DayProps } from '../../App';
+import {
+  FilterContext,
+  ContextObject,
+  DayProps,
+  SidebarContext,
+  ContextSidebar,
+} from '../../App';
 import { host } from '../..';
 import { Day } from '../Day';
 import { Loader } from '../Loader';
@@ -11,6 +17,7 @@ export const Timetable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [items, setItems] = useState<Array<DayProps>>([]);
   const { searchValue } = useContext<ContextObject>(FilterContext);
+  const { setSidebarActive } = useContext<ContextSidebar>(SidebarContext);
 
   // setIsLoading(true);
 
@@ -36,7 +43,9 @@ export const Timetable = () => {
       .then((json) => {
         setItems(json.data);
       })
+      .then(() => setSidebarActive(false))
       .then(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   return (
