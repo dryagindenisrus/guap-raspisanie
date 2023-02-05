@@ -16,8 +16,10 @@ import styles from './Filter.module.scss';
 interface ParamsFilterInput {
   group: Param;
   prepod: Param;
-  corpus: Param;
-  audit: Param;
+}
+
+export interface semInfo {
+  CurrentWeek: number;
 }
 
 export const Filter = () => {
@@ -28,17 +30,41 @@ export const Filter = () => {
   const [items, setItems] = useState<{
     groups: Array<Param>;
     prepods: Array<Param>;
-    corpuses: Array<Param>;
-    audits: Array<Param>;
     today: boolean;
-  }>({ groups: [], prepods: [], corpuses: [], audits: [], today: false });
+  }>({ groups: [], prepods: [], today: false });
 
   useEffect(() => {
-    fetch(host + '/api/v1/params')
+    const arrParams: { groups: Array<Param>; prepods: Array<Param>; today: semInfo } = {
+      groups: [],
+      prepods: [],
+      today: { CurrentWeek: 0 },
+    };
+    fetch(host + '/get-sem-groups')
       .then((res) => res.json())
       .then((json) => {
         setTimeout(() => {
-          setItems(json);
+          arrParams.groups = json;
+          fetch(host + '/get-sem-preps')
+            .then((res) => res.json())
+            .then((json) => {
+              setTimeout(() => {
+                arrParams.prepods = json;
+                fetch(host + '/get-sem-info')
+                  .then((res) => res.json())
+                  .then((json) => {
+                    setTimeout(() => {
+                      arrParams.today = json;
+                      arrParams.groups.unshift({ Name: 'нет', ItemId: -1 });
+                      arrParams.prepods.unshift({ Name: 'нет', ItemId: -1 });
+                      setItems({
+                        groups: arrParams.groups,
+                        prepods: arrParams.prepods,
+                        today: Boolean(arrParams.today.CurrentWeek % 2),
+                      });
+                    });
+                  });
+              });
+            });
         });
       });
   }, []);
@@ -49,82 +75,46 @@ export const Filter = () => {
   const [prepodSt, setPrepodSt] = useState<string>(
     window.localStorage.getItem('selectedPrepod') || ''
   );
-  const [corpusSt, setCorpusSt] = useState<string>(
-    window.localStorage.getItem('selectedCorpus') || ''
-  );
-  const [auditSt, setAuditSt] = useState<string>(
-    window.localStorage.getItem('selectedAudit') || ''
-  );
 
   const onClickEvent = () => {
     setPeriod(items.today);
     /* eslint-disable indent */
     const genereObject: ParamsFilterInput = {
-      group: items.groups.filter((elem) => elem.name.includes(groupSt))[0] || {
-          value: window.localStorage.getItem('selectedGroup')?.split('&')[1],
-          name: window.localStorage.getItem('selectedGroup')?.split('&')[0],
+      group: items.groups.filter((elem) => elem.Name.includes(groupSt))[0] || {
+          ItemId: window.localStorage.getItem('selectedGroup')?.split('&')[1],
+          Name: window.localStorage.getItem('selectedGroup')?.split('&')[0],
         } || {
-          value: -1,
-          name: '- нет -',
+          ItemId: -1,
+          Name: 'нет',
         },
-      prepod: items.prepods.filter((elem1) => elem1.name.includes(prepodSt))[0] || {
-          value: window.localStorage.getItem('selectedPrepod')?.split('&')[1],
-          name: window.localStorage.getItem('selectedPrepod')?.split('&')[0],
+      prepod: items.prepods.filter((elem1) => elem1.Name.includes(prepodSt))[0] || {
+          ItemId: window.localStorage.getItem('selectedPrepod')?.split('&')[1],
+          Name: window.localStorage.getItem('selectedPrepod')?.split('&')[0],
         } || {
-          value: -1,
-          name: '- нет -',
-        },
-      corpus: items.corpuses.filter((elem2) => elem2.name.includes(corpusSt))[0] || {
-          value: window.localStorage.getItem('selectedCorpus')?.split('&')[1],
-          name: window.localStorage.getItem('selectedCorpus')?.split('&')[0],
-        } || {
-          value: -1,
-          name: '- нет -',
-        },
-      audit: items.audits.filter((elem3) => elem3.name.includes(auditSt))[0] || {
-          value: window.localStorage.getItem('selectedAudit')?.split('&')[1],
-          name: window.localStorage.getItem('selectedAudit')?.split('&')[0],
-        } || {
-          value: -1,
-          name: '- нет -',
+          ItemId: -1,
+          Name: 'нет',
         },
     };
     setSidebarActive(false);
     setSearchValue({
       group: {
-        value: genereObject.group?.value || -1,
-        name: genereObject.group?.name || '- нет -',
+        ItemId: genereObject.group?.ItemId || -1,
+        Name: genereObject.group?.Name || 'нет',
       },
       prepod: {
-        value: genereObject.prepod?.value || -1,
-        name: genereObject.prepod?.name || '- нет -',
-      },
-      corpus: {
-        value: genereObject.corpus?.value || -1,
-        name: genereObject.corpus?.name || '- нет -',
-      },
-      audit: {
-        value: genereObject.audit?.value || -1,
-        name: genereObject.audit?.name || '- нет -',
+        ItemId: genereObject.prepod?.ItemId || -1,
+        Name: genereObject.prepod?.Name || 'нет',
       },
       today: items.today,
     });
 
     window.localStorage.setItem(
       'selectedGroup',
-      genereObject.group.name + '&' + genereObject.group.value
+      genereObject.group.Name + '&' + genereObject.group.ItemId
     );
     window.localStorage.setItem(
       'selectedPrepod',
-      genereObject.prepod.name + '&' + genereObject.prepod.value
-    );
-    window.localStorage.setItem(
-      'selectedCorpus',
-      genereObject.corpus.name + '&' + genereObject.corpus.value
-    );
-    window.localStorage.setItem(
-      'selectedAudit',
-      genereObject.audit.name + '&' + genereObject.audit.value
+      genereObject.prepod.Name + '&' + genereObject.prepod.ItemId
     );
   };
 
@@ -146,22 +136,6 @@ export const Filter = () => {
         setParametr={setPrepodSt}
         data={items.prepods}
         placeholder="Преподаватель..."
-      />
-      <span className={styles.label}>Корпус</span>
-      <SearchBar
-        selected="Corpus"
-        key="b"
-        setParametr={setCorpusSt}
-        data={items.corpuses}
-        placeholder="Корпус..."
-      />
-      <span className={styles.label}>Аудитория</span>
-      <SearchBar
-        selected="Audit"
-        key="r"
-        setParametr={setAuditSt}
-        data={items.audits}
-        placeholder="Аудитория..."
       />
       <button key="btn" onClick={() => onClickEvent()} className={styles.button64}>
         <span className={styles.text}>Найти</span>
