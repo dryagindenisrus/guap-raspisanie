@@ -4,9 +4,9 @@ import axios from 'axios';
 import {
   FilterContext,
   ContextObject,
-  DayProps,
   SidebarContext,
   ContextSidebar,
+  Lesson,
 } from '../../App';
 import { host } from '../..';
 import { Day } from '../Day';
@@ -15,7 +15,7 @@ import styles from './Timetable.module.scss';
 
 export const Timetable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [items, setItems] = useState<Array<DayProps>>([]);
+  const [items, setItems] = useState<Array<Lesson>>([]);
   const { searchValue } = useContext<ContextObject>(FilterContext);
   const { setSidebarActive } = useContext<ContextSidebar>(SidebarContext);
 
@@ -25,28 +25,72 @@ export const Timetable = () => {
     setIsLoading(true);
     const req: string =
       host +
-      `/api/v1/rasp/${
-        window.localStorage.getItem('selectedGroup')?.split('&')[1] ||
-        searchValue.group.value
+      `/get-sem-rasp${
+        window.localStorage.getItem('selectedGroup')?.split('&')[1] &&
+        /* eslint-disable */
+        searchValue.group.ItemId + 1 > 0
+          ? `/group${
+              window.localStorage.getItem('selectedGroup')?.split('&')[1] ||
+              searchValue.group.ItemId
+            }`
+          : ''
       }/${
-        window.localStorage.getItem('selectedPrepod')?.split('&')[1] ||
-        searchValue.prepod.value
-      }/${
-        window.localStorage.getItem('selectedCorpus')?.split('&')[1] ||
-        searchValue.corpus.value
-      }/${
-        window.localStorage.getItem('selectedAudit')?.split('&')[1] ||
-        searchValue.audit.value
+        window.localStorage.getItem('selectedPrepod')?.split('&')[1] &&
+        /* eslint-disable */
+        searchValue.prepod.ItemId + 1 > 0
+          ? `prep${
+              window.localStorage.getItem('selectedPrepod')?.split('&')[1] ||
+              searchValue.prepod.ItemId
+            }/`
+          : ''
       }`;
-    axios
-      .get(req)
-      .then((json) => {
-        setItems(json.data);
-      })
-      .then(() => setSidebarActive(false))
-      .then(() => setIsLoading(false));
+    /* eslint-enable */
+    if (req !== 'https://api.guap.ru/rasp/custom/get-sem-rasp/') {
+      axios
+        .get(req)
+        .then((json) => {
+          setItems(json.data);
+        })
+        .then(() => setSidebarActive(false))
+        .then(() => setIsLoading(false));
+    } else {
+      setItems([]);
+      setSidebarActive(false);
+      setIsLoading(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
+
+  const less: Lesson = {
+    ItemId: 0,
+    Week: 0,
+    Day: 0,
+    Less: 0,
+    Build: '',
+    Rooms: '',
+    Disc: '',
+    Type: '',
+    Groups: '',
+    GroupsText: '',
+    Preps: '',
+    PrepsText: '',
+    Dept: null,
+  };
+
+  const groupBy = (array: Array<Lesson>, key: string): Array<Array<Lesson>> => {
+    return array.reduce(
+      (result, currentValue) => {
+        (result[currentValue.Day] = result[currentValue.Day] || []).push(currentValue);
+        return result;
+      },
+      [[less]]
+    );
+  };
+
+  const grouped: Array<Array<Lesson>> = groupBy(
+    items.sort((a, b) => (a.Day >= b.Day ? 1 : -1)),
+    'Day'
+  );
 
   return (
     <main className={styles.main_active + ' ' + styles.main}>
@@ -54,11 +98,11 @@ export const Timetable = () => {
         <Loader message="Загрузка..." />
       ) : items.length ? (
         <div className={styles.content}>
-          {items.map((dayLessons, index) => (
+          {grouped.map((dayLessons, index) => (
             <Day
-              key={dayLessons.day + index.toString()}
-              day={dayLessons.day}
-              lessons={dayLessons.lessons}
+              key={dayLessons[0].Day + index.toString()}
+              day={dayLessons[0].Day}
+              lessons={dayLessons}
             />
           ))}
         </div>

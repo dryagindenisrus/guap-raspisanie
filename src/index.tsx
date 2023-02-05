@@ -4,8 +4,8 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// export const host = 'https://api.guap.ru/rasp/custom';
-export const host = 'https://guap-raspisanie.duckdns.org';
+export const host = 'https://api.guap.ru/rasp/custom';
+// export const host = 'https://guap-raspisanie.duckdns.org';
 // export const host = 'http://192.168.1.178:8000';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

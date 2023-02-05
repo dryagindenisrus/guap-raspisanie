@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { ContextPeriod, PeriodContext, DayProps } from '../../App';
-import { Period } from '../Period';
 import styles from './Day.module.scss';
 import calendar from '../../img/calendar.svg';
 import clock from '../../img/clock.svg';
@@ -19,57 +18,90 @@ export const Day: React.FC<DayProps> = (props) => {
     { name: 'ЛР', type: Lr },
     { name: 'КР', type: Kr },
   ];
+  const days: Array<string> = [
+    'Вне сетки расписания',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+  ];
+  const times: Array<string> = [
+    '9:30–11:00',
+    '11:10–12:40',
+    '13:00–14:30',
+    '15:00–16:30',
+    '16:40–18:10',
+    '18:30–20:00',
+    '20:10–21:40',
+  ];
   const { period } = useContext<ContextPeriod>(PeriodContext);
 
-  const isTruePeriod = (period: boolean, lessonPeriod: string) => {
-    const arrayPeriods: Array<string> = ['low', 'up', 'all'];
-    return Boolean(arrayPeriods[Number(period)] !== lessonPeriod);
+  const isTruePeriod = (period: boolean, lessonPeriod: number) => {
+    return lessonPeriod ? Boolean(Number(period) + 1 === lessonPeriod) : true;
   };
 
   return (
-    <div className={styles.day}>
+    <div key={props.day} className={styles.day}>
       <span className={styles.dayName}>
         <img src={calendar} alt="calendar" />
-        {props.day}
+        {days[props.day]}
       </span>
 
       <div className={styles.lessons}>
-        {props.lessons.map((para) =>
-          para.map((lesson, id) =>
-            isTruePeriod(period, lesson.period) ? (
-              <div key={lesson.name + '_' + lesson.period} className={styles.lesson}>
-                <div className={styles.time}>
-                  <span className={styles.lessonCount}>{lesson.count} пара</span>
-                  {lesson.time ? <img src={clock} alt="clock" /> : <></>}
-                  <span className={styles.lessonTime}>{lesson.time}</span>
-                  <Period period={lesson.period} />
+        {props.lessons
+          .sort((a, b) => (a.Less >= b.Less ? 1 : -1))
+          .map((lesson) =>
+            lesson.ItemId ? (
+              isTruePeriod(period, lesson.Week) ? (
+                <div key={lesson.ItemId} className={styles.lesson}>
+                  <div className={styles.time}>
+                    <span className={styles.lessonCount}>
+                      {lesson.Less ? (
+                        <>{lesson.Less} пара</>
+                      ) : (
+                        <>Вне сетки расписания</>
+                      )}
+                    </span>
+                    {lesson.Less ? <img src={clock} alt="clock" /> : <></>}
+                    <span className={styles.lessonTime}>{times[lesson.Less - 1]}</span>
+                  </div>
+                  <div className={styles.name}>
+                    <img
+                      src={
+                        // typeLesson.filter((elem) => elem.name === lesson.type)[0]
+                        typeLesson.find((elem) => elem.name === lesson.Type)?.type
+                      }
+                      alt=""
+                    />
+                    <span>{lesson.Disc}</span>
+                  </div>
+                  <div className={styles.info}>
+                    <span>
+                      <img src={build} alt="" />
+                      {lesson.Build ? (
+                        <>
+                          {lesson?.Build} {lesson?.Rooms}
+                        </>
+                      ) : (
+                        <>{lesson.Dept}</>
+                      )}
+                      {/* {lesson?.Build} {lesson?.Rooms} */}
+                    </span>
+                    <span>
+                      {lesson.PrepsText ? <img src={person} alt="" /> : <></>}
+                      {lesson.PrepsText ? lesson.PrepsText : <></>}
+                    </span>
+                  </div>
                 </div>
-                <div className={styles.name}>
-                  <img
-                    src={
-                      // typeLesson.filter((elem) => elem.name === lesson.type)[0]
-                      typeLesson.find((elem) => elem.name === lesson.type)?.type
-                    }
-                    alt=""
-                  />
-                  <span>{lesson.name}</span>
-                </div>
-                <div className={styles.info}>
-                  <span>
-                    <img src={build} alt="" />
-                    {lesson.location}
-                  </span>
-                  <span>
-                    {lesson.prepod ? <img src={person} alt="" /> : <></>}
-                    {lesson.prepod}
-                  </span>
-                </div>
-              </div>
+              ) : (
+                <></>
+              )
             ) : (
               <></>
             )
-          )
-        )}
+          )}
       </div>
     </div>
   );

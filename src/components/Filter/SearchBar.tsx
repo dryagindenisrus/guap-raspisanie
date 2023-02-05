@@ -5,20 +5,15 @@ import styles from './Filter.module.scss';
 
 interface SearchBarProps {
   setParametr: React.Dispatch<React.SetStateAction<string>>;
-  data: Array<{ name: string; value: number }>;
+  data: Array<{ Name: string; ItemId: number }>;
   placeholder: string;
   selected: string;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = (props) => {
-  const changeValue = (event: { name: string; value: number } | null) => {
-    props.setParametr(event?.name || '');
+  const changeValue = (event: { Name: string; ItemId: number } | null) => {
+    props.setParametr(event?.Name || '');
   };
-
-  // window.localStorage.setItem("selectedGroup", genereObject.group.name);
-  //   window.localStorage.setItem("selectedPrepod", genereObject.prepod.name);
-  //   window.localStorage.setItem("selectedCorpus", genereObject.corpus.name);
-  //   window.localStorage.setItem("selectedAudit", genereObject.audit.name);
 
   return (
     <Select
@@ -26,17 +21,13 @@ export const SearchBar: React.FC<SearchBarProps> = (props) => {
         window.localStorage
           .getItem('selected' + props.selected)
           ?.split('&')[0]
-          .replace('- нет -', '') || undefined
+          .replace('нет', '') || undefined
       }
       className={styles.input}
       placeholder={props.placeholder}
       onChange={(event) => changeValue(event)}
-      getOptionLabel={(option) => {
-        return option.name;
-      }}
-      getOptionValue={(option) => {
-        return option.name;
-      }}
+      getOptionLabel={(option) => option?.Name}
+      getOptionValue={(option) => option?.Name}
       options={props.data}
     />
   );
