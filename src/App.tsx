@@ -8,31 +8,34 @@ import { Navbar } from './components/Navbar';
 // import { getParams } from './parser';
 
 export interface Lesson {
-  count: string;
-  time: string;
-  name: string;
-  type: string;
-  prepod: string;
-  location: string;
-  period: string;
+  ItemId: number;
+  Week: number;
+  Day: number;
+  Less: number;
+  Build: string;
+  Rooms: string | null;
+  Disc: string;
+  Type: string;
+  Groups: string;
+  GroupsText: string;
+  Preps: string | null;
+  PrepsText: string;
+  Dept: null;
 }
-export type Para = Array<Lesson>;
 
 export interface DayProps {
-  day: string;
-  lessons: Array<Para>;
+  day: number;
+  lessons: Array<Lesson>;
 }
 
 export interface Param {
-  value: number;
-  name: string;
+  ItemId: number;
+  Name: string;
 }
 
 export interface ParamsFilter {
   group: Param;
   prepod: Param;
-  corpus: Param;
-  audit: Param;
   today: boolean;
 }
 
@@ -60,10 +63,10 @@ export const SidebarContext = createContext<ContextSidebar>({
 
 export const FilterContext = createContext<ContextObject>({
   searchValue: {
-    group: { value: -1, name: '' },
-    prepod: { value: -1, name: '' },
-    corpus: { value: -1, name: '' },
-    audit: { value: -1, name: '' },
+    group: { ItemId: -1, Name: '' },
+    prepod: { ItemId: -1, Name: '' },
+    // corpus: { ItemId: -1, Name: '' },
+    // audit: { ItemId: -1, Name: '' },
     today: false,
   },
   setSearchValue: React.useState,
@@ -79,10 +82,10 @@ function App() {
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
 
   const [filter, setFilter] = useState<ParamsFilter>({
-    group: { value: -1, name: '' },
-    prepod: { value: -1, name: '' },
-    corpus: { value: -1, name: '' },
-    audit: { value: -1, name: '' },
+    group: { ItemId: -1, Name: '' },
+    prepod: { ItemId: -1, Name: '' },
+    // corpus: { value: -1, name: '' },
+    // audit: { value: -1, name: '' },
     today: false,
   });
 
