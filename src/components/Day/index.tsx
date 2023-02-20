@@ -83,7 +83,7 @@ export const Day: React.FC<DayProps> = (props) => {
                       <img src={build} alt="" />
                       {lesson.Build ? (
                         <>
-                          {lesson?.Build} {lesson?.Rooms}
+                          {lesson?.Build} <strong>{lesson?.Rooms}</strong>
                         </>
                       ) : (
                         <>{lesson.Dept}</>
