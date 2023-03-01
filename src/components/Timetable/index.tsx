@@ -26,7 +26,7 @@ export const Timetable = () => {
     const req: string =
       host +
       `/get-sem-rasp${
-        window.localStorage.getItem('selectedGroup')?.split('&')[1] &&
+        window.localStorage.getItem('selectedGroup')?.split('&')[1] !== '-1' ||
         /* eslint-disable */
         searchValue.group.ItemId + 1 > 0
           ? `/group${
@@ -35,7 +35,7 @@ export const Timetable = () => {
             }`
           : ''
       }/${
-        window.localStorage.getItem('selectedPrepod')?.split('&')[1] &&
+        window.localStorage.getItem('selectedPrepod')?.split('&')[1] !== '-1' ||
         /* eslint-disable */
         searchValue.prepod.ItemId + 1 > 0
           ? `prep${

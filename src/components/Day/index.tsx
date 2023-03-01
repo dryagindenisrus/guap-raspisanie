@@ -10,6 +10,7 @@ import Pr from '../../img/PR.svg';
 import Kr from '../../img/KR.svg';
 import person from '../../img/person.svg';
 import build from '../../img/build.svg';
+import group from '../../img/group.svg';
 
 export const Day: React.FC<DayProps> = (props) => {
   const typeLesson: Array<{ name: string; type: string }> = [
@@ -82,7 +83,7 @@ export const Day: React.FC<DayProps> = (props) => {
                       <img src={build} alt="" />
                       {lesson.Build ? (
                         <>
-                          {lesson?.Build} {lesson?.Rooms}
+                          {lesson?.Build} <strong>{lesson?.Rooms}</strong>
                         </>
                       ) : (
                         <>{lesson.Dept}</>
@@ -92,6 +93,10 @@ export const Day: React.FC<DayProps> = (props) => {
                     <span>
                       {lesson.PrepsText ? <img src={person} alt="" /> : <></>}
                       {lesson.PrepsText ? lesson.PrepsText : <></>}
+                    </span>
+                    <span>
+                      {lesson.GroupsText ? <img src={group} alt="" /> : <></>}
+                      {lesson.GroupsText ? lesson.GroupsText : <></>}
                     </span>
                   </div>
                 </div>

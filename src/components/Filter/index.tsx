@@ -59,8 +59,9 @@ export const Filter = () => {
                       setItems({
                         groups: arrParams.groups,
                         prepods: arrParams.prepods,
-                        today: Boolean(arrParams.today.CurrentWeek % 2),
+                        today: Boolean((arrParams.today.CurrentWeek + 1) % 2),
                       });
+                      setPeriod(Boolean((arrParams.today.CurrentWeek + 1) % 2));
                     });
                   });
               });
