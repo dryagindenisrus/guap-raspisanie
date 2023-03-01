@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-
+// абсолютные пути используй
 import {
   SidebarContext,
   ContextSidebar,
@@ -37,6 +37,7 @@ export const Sidebar = () => {
       <Filter />
       <div className={styles.togglePeriod}>
         <span>Выбрать неделю</span>
+        {/** setPeriod(prev=>!prev)*/}
         <button onClick={() => setPeriod(!period)} className={styles.toggleBtn}>
           <img src={period ? low : up} alt="" />
         </button>

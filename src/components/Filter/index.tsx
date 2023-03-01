@@ -39,7 +39,7 @@ export const Filter = () => {
       prepods: [],
       today: { CurrentWeek: 0 },
     };
-    fetch(host + '/get-sem-groups')
+    fetch(host + '/get-sem-groups')// на async await перепиши, а зачем в setTimeout оборачивать?
       .then((res) => res.json())
       .then((json) => {
         setTimeout(() => {
@@ -137,6 +137,7 @@ export const Filter = () => {
         data={items.prepods}
         placeholder="Преподаватель..."
       />
+      {/** onClick={() => onClickEvent()} =>>> onClick={onClickEvent}*/}
       <button key="btn" onClick={() => onClickEvent()} className={styles.button64}>
         <span className={styles.text}>Найти</span>
       </button>

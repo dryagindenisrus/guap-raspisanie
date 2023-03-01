@@ -7,6 +7,7 @@ import { Timetable } from './components/Timetable';
 import { Navbar } from './components/Navbar';
 // import { getParams } from './parser';
 
+// Все интерфейсы в отдельный файл, максимум для типизации компонента можно оставить, если он не большой
 export interface Lesson {
   ItemId: number;
   Week: number;
@@ -25,7 +26,7 @@ export interface Lesson {
 
 export interface DayProps {
   day: number;
-  lessons: Array<Lesson>;
+  lessons: Array<Lesson>; // Lesson[]
 }
 
 export interface Param {
@@ -39,7 +40,7 @@ export interface ParamsFilter {
   today: boolean;
 }
 
-export type TimeTable = Array<DayProps>;
+export type TimeTable = Array<DayProps>;//DayProps[]
 
 export interface ContextObject {
   searchValue: ParamsFilter;
@@ -78,7 +79,7 @@ export const PeriodContext = createContext<ContextPeriod>({
 });
 
 function App() {
-  const [period, setPeriod] = useState<boolean>(false);
+  const [period, setPeriod] = useState<boolean>(false);// излишняя типизация, если задано дефолтное значение из примитивных типов, TS и так определит какой это тип
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
 
   const [filter, setFilter] = useState<ParamsFilter>({
@@ -94,7 +95,8 @@ function App() {
       <FilterContext.Provider
         value={{ searchValue: filter, setSearchValue: setFilter }}
       >
-        <PeriodContext.Provider value={{ period: period, setPeriod: setPeriod }}>
+        <PeriodContext.Provider value={{ period: period, setPeriod: setPeriod }}>{/*значение в value нужно обернуть в useMemo, иначе у тебя будут лишнии перерисовки,
+                                                                                     так как такая передача объкта всегда возвращает новую ссылку */}
           <SidebarContext.Provider
             value={{
               sidebarActive: sidebarActive,

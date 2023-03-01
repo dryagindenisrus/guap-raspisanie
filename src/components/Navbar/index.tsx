@@ -24,6 +24,7 @@ export const Navbar = () => {
         <button onClick={() => setPeriod(!period)} className={styles.toggleBtn}>
           <img src={period ? low : up} alt="" />
         </button>
+        {/** setSidebarActive(prev=>!prev)*/}
         <button
           onClick={() => setSidebarActive(!sidebarActive)}
           className={styles.openBtn}

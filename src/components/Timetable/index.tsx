@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-
+// Используй абсолютные пути
 import {
   FilterContext,
   ContextObject,
@@ -15,7 +15,7 @@ import styles from './Timetable.module.scss';
 
 export const Timetable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [items, setItems] = useState<Array<Lesson>>([]);
+  const [items, setItems] = useState<Array<Lesson>>([]);// Вместо Array<Lesson> пиши Lesson[]
   const { searchValue } = useContext<ContextObject>(FilterContext);
   const { setSidebarActive } = useContext<ContextSidebar>(SidebarContext);
 
@@ -88,7 +88,7 @@ export const Timetable = () => {
   };
 
   const grouped: Array<Array<Lesson>> = groupBy(
-    items.sort((a, b) => (a.Day >= b.Day ? 1 : -1)),
+    items.sort((a, b) => (a.Day >= b.Day ? 1 : -1)), //items.sort((a, b) => (a.Day - b.Day))
     'Day'
   );
 
