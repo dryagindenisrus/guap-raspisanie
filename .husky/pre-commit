@@ -1,0 +1,3 @@
+npm run lint
+
+echo -e "\n\033[32m<---PRE-COMMIT COMPLETED--->\033[0m\n"

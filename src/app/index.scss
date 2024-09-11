@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(./_variables.scss);
+
+:root {
+  font-family: Arial, sans-serif !important;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  min-width: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
